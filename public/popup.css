@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    width: 250px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+h1 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+/* Hover effect */
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Click effect */
+button:active {
+    transform: scale(0.95); /* Shrink effect when clicked */
+}

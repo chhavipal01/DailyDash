@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  font-family: poppins,  sans-serif;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  
+  
+}
+
+
+.App {
+  
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+    height: 100vh;
+    padding: 20px;
+    
+  
+  font-family: "Poppins", helvetica, arial, sans-serif;
+}
+
+
+:root {
+  --bg-color-red: #ffdddd;
+  --accentLightTint-red: #ffaaaa;
+  --darkerColor-red: #cc0000;
+  --textColorDark-red: #660000;
+
+  --bg-color-yellow: #ffffcc;
+  --accentLightTint-yellow: #ffee99;
+  --darkerColor-yellow: #ccaa00;
+  --textColorDark-yellow: #664400;
+
+  --bg-color-green: #ddffdd;
+  --accentLightTint-green: #99ff99;
+  --darkerColor-green: #009900;
+  --textColorDark-green: #006600;
+
+  --bg-color-dark: #121212;
+  --textColorDark-dark: #ffffff;
+}
+.item12 {
+  position: fixed;
+  left: 10px;
+  top: 20%;
+}
