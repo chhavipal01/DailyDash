@@ -59,9 +59,9 @@ const Weather = () => {
 
   return (
     <div
-      className="p-4 rounded-lg shadow-md w-full"
+      className="p-4 rounded-xl shadow-md w-full h-70"
       style={{
-        backgroundColor: themes[theme].bg,
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
         color: themes[theme].text,
       }}
     >

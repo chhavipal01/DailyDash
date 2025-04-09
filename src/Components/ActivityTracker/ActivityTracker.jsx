@@ -60,8 +60,8 @@ const ActivityTracker = () => {
 
   return (
     <div
-      className="p-4 rounded-xl shadow-md w-full h-72"
-      style={{ backgroundColor: themes[theme].bg, color: themes[theme].text }}
+      className="p-4 rounded-xl shadow-md w-full  min-h-[260px]"
+      style={{ backgroundColor:"rgba(255, 255, 255, 0.5)" , color: themes[theme].text }}
     >
       <h2 className="font-bold mb-4">Weekly Activity Tracker</h2>
       {chartData ? (

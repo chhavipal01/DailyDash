@@ -13,7 +13,8 @@ export default function Searchbar() {
   }, [query]);
 
   return (
-    <div className="flex items-center p-3 w-full justify-start">
+    <div className="flex items-center p-3 w-full jus
+    tify-start">
       <div className="relative w-full max-w-xl">
         {/* Search Icon */}
         <div

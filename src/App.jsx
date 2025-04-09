@@ -41,13 +41,13 @@ function AppContent() {
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col px-20 py-10 gap-4">
+        <div className="flex flex-col px-20 py-10  gap-4 ">
           {/* Weather + Activity Tracker Side by Side */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-3 border rounded-xl">
+            <div className="p-2 border rounded-xl">
               <Weather />
             </div>
-            <div className="p-3 border rounded-xl">
+            <div className="p-2 border rounded-xl">
               <ActivityTracker />
             </div>
           </div>
