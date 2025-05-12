@@ -31,7 +31,7 @@ const SocialButtons = ({ customIcons = [] }) => {
           className="w-12 h-12 flex items-center justify-center rounded-full text-2xl transition-transform transform hover:scale-110 shadow-md"
           style={{
             backgroundColor: themes[theme].button, // Theme-based button color
-            color: themes[theme].text, // Theme-based text color
+            color: "white", // Theme-based text color
           }}
         >
           {icon}

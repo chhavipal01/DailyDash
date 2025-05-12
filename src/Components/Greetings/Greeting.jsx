@@ -3,6 +3,10 @@ import { ThemeContext } from "../../Context/ThemeContext";
 
 const Greeting = () => {
   const { theme, themes } = useContext(ThemeContext);
+   if (!theme) {
+    console.error("Theme is not available");
+    return null;
+  }
 
   return (
     <div 

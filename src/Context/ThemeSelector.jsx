@@ -13,7 +13,7 @@ const ThemeSelector = () => {
             name="color"
             value={themeKey}
             checked={theme === themeKey}
-            onChange={() => updateTheme(themeKey)}  // ✅ FIXED
+            onChange={() => updateTheme(themeKey)}  
             className="hidden"
           />
           <div

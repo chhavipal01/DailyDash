@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../../Context/ThemeContext";
+import LordIcon from "../LordIcon";
 
 const Weather = () => {
   const { theme, themes } = useContext(ThemeContext);
@@ -10,6 +11,24 @@ const Weather = () => {
 
   const apikey = "b80f63525271b0c855528df460e1e9ee";
   const apiurl = "https://api.openweathermap.org/data/2.5/weather";
+
+  const weatherIcons = {
+    Clear: "https://cdn.lordicon.com/rjzlnunf.json",
+    Clouds: "https://cdn.lordicon.com/slkvcfos.json",
+    Rain: "https://cdn.lordicon.com/lzgqzxrq.json",
+    Drizzle: "https://cdn.lordicon.com/koyszqnh.json",
+    Thunderstorm: "https://cdn.lordicon.com/udwhdpod.json",
+    Snow: "https://cdn.lordicon.com/xirobkro.json",
+    Mist: "https://cdn.lordicon.com/qghrdngw.json",
+    Smoke: "https://cdn.lordicon.com/qghrdngw.json",
+    Haze: "https://cdn.lordicon.com/qghrdngw.json",
+    Fog: "https://cdn.lordicon.com/qghrdngw.json",
+    Dust: "https://cdn.lordicon.com/qghrdngw.json",
+    Sand: "https://cdn.lordicon.com/qghrdngw.json",
+    Ash: "https://cdn.lordicon.com/qghrdngw.json",
+    Squall: "https://cdn.lordicon.com/qghrdngw.json",
+    Tornado: "https://cdn.lordicon.com/qghrdngw.json",
+  };
 
   const fetchWeatherByCity = async (city) => {
     setLoading(true);
@@ -47,19 +66,9 @@ const Weather = () => {
   const capitalizeWords = (str) =>
     str ? str.replace(/\b\w/g, (char) => char.toUpperCase()) : "";
 
-  const weatherImages = {
-    Clear: "https://cdn-icons-png.flaticon.com/512/869/869869.png",
-    Clouds: "https://cdn-icons-png.flaticon.com/512/414/414825.png",
-    Rain: "https://cdn-icons-png.flaticon.com/512/3351/3351979.png",
-    Drizzle: "https://cdn-icons-png.flaticon.com/512/4005/4005901.png",
-    Thunderstorm: "https://cdn-icons-png.flaticon.com/512/1146/1146860.png",
-    Snow: "https://cdn-icons-png.flaticon.com/512/642/642102.png",
-    Mist: "https://cdn-icons-png.flaticon.com/512/1197/1197102.png",
-  };
-
   return (
     <div
-      className="p-4 rounded-xl shadow-md w-full h-70"
+      className="p-4 rounded-3xl shadow-md w-full  h-70"
       style={{
         backgroundColor: "rgba(255, 255, 255, 0.5)",
         color: themes[theme].text,
@@ -99,14 +108,14 @@ const Weather = () => {
           <h2 className="text-2xl font-bold">
             {weather.name}, {weather.sys.country}
           </h2>
-          <img
-            src={
-              weatherImages[weather.weather[0].main] ||
-              "https://cdn-icons-png.flaticon.com/512/1163/1163624.png"
-            }
-            alt={weather.weather[0].description}
-            className="w-10 h-10 mx-auto my-2"
-          />
+          <div className="flex justify-center my-2">
+            <LordIcon
+              src={weatherIcons[weather.weather[0].main] || weatherIcons["Clear"]}
+              width={80}
+              height={80}
+              trigger="loop"
+            />
+          </div>
           <p className="text-lg font-extrabold">{weather.main.temp}°C</p>
           <p>Weather: {capitalizeWords(weather.weather[0].description)}</p>
           <p>Humidity: {weather.main.humidity}%</p>

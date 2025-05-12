@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Bar } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import { ThemeContext } from "../../Context/ThemeContext";
 
@@ -24,22 +24,39 @@ const ActivityTracker = () => {
           }
         });
 
-        const labels = Object.keys(groupedData);
-        const values = Object.values(groupedData);
+        const sortedEntries = Object.entries(groupedData).sort((a, b) => b[1] - a[1]);
+        const labels = sortedEntries.map(([domain]) => domain);
+        const values = sortedEntries.map(([_, time]) => time);
 
         if (labels.length === 0) {
           setChartData(null);
           return;
         }
 
+        const vibrantColors = [
+          "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0",
+          "#9966FF", "#FF9F40", "#FF6F61", "#00C49F",
+          "#FF4444", "#FFBB28", "#33B5E5", "#AA66CC"
+        ];
+
+        const generateColors = (num) => {
+          const colors = [];
+          for (let i = 0; i < num; i++) {
+            colors.push(vibrantColors[i % vibrantColors.length]);
+          }
+          return colors;
+        };
+
         setChartData({
           labels,
           datasets: [{
             label: "Time Spent",
             data: values,
-            backgroundColor: themes[theme].button,
-            borderColor: themes[theme].text,
-            borderWidth: 1,
+            backgroundColor: generateColors(values.length),
+            borderColor: "#ffffff",
+            borderWidth: 2,
+            hoverBorderColor: "#000000",
+            hoverBorderWidth: 2,
           }],
         });
       });
@@ -50,9 +67,11 @@ const ActivityTracker = () => {
         datasets: [{
           label: "Time Spent",
           data: [120, 35],
-          backgroundColor: themes[theme].button,
-          borderColor: themes[theme].text,
-          borderWidth: 1,
+          backgroundColor: ["#FF6384", "#36A2EB"],
+          borderColor: "#ffffff",
+          borderWidth: 2,
+          hoverBorderColor: "#000000",
+          hoverBorderWidth: 2,
         }],
       });
     }
@@ -60,41 +79,42 @@ const ActivityTracker = () => {
 
   return (
     <div
-      className="p-4 rounded-xl shadow-md w-full  min-h-[260px]"
-      style={{ backgroundColor:"rgba(255, 255, 255, 0.5)" , color: themes[theme].text }}
+      className="p-4 rounded-3xl  w-full "
+      style={{
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
+        color: themes[theme].text,
+        maxHeight: "280px", // reduced height
+      }}
     >
-      <h2 className="font-bold mb-4">Weekly Activity Tracker</h2>
+      <h2 className="text-md font-semibold mb-2">Activity Tracker</h2>
       {chartData ? (
-        <div className="w-full h-full">
-          <Bar
+        <div className="w-full h-[220px]"> {/* bigger chart */}
+          <Doughnut
             data={chartData}
             options={{
               responsive: true,
               maintainAspectRatio: false,
-              scales: {
-                y: {
-                  ticks: {
-                    color: themes[theme].text,
-                    callback: (value) =>
-                      value >= 60 ? `${(value / 60).toFixed(2)} hr` : `${value} min`,
-                  },
-                },
-                x: {
-                  ticks: { color: themes[theme].text },
-                },
-              },
+              cutout: "50%", // controls donut thickness
               plugins: {
                 tooltip: {
                   callbacks: {
                     label: function (tooltipItem) {
+                      const label = tooltipItem.label || "";
                       const value = tooltipItem.raw;
-                      return value >= 60 ? `${(value / 60).toFixed(2)} hr` : `${value} min`;
+                      return `${label}: ${value >= 60
+                        ? (value / 60).toFixed(1) + " hr"
+                        : value + " min"
+                        }`;
                     },
                   },
                 },
                 legend: {
+                  position: "right",
                   labels: {
                     color: themes[theme].text,
+                    boxWidth: 12,
+                    font: { size: 12 },
+                    padding: 12,
                   },
                 },
               },

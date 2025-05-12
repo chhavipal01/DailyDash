@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lordicon/react": "^1.10.1",
     "@shadcn/ui": "^0.0.4",
     "chart.js": "^4.4.8",
     "firebase": "^11.6.0",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.482.0",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.3.0",

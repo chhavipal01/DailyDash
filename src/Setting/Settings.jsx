@@ -15,31 +15,31 @@ const Settings = () => {
   const currentTheme = themes[theme] || {};
 
   return (
-    <div className="p-4 fixed right-4 bottom-4 z-50">
+    <div className="p-4 fixed right-5 bottom-5 z-50">
       {/* Toggle Icon Button */}
       <button
         onClick={() => setInSettings(!inSettings)}
-        className="p-2 rounded-full shadow-md transition-all"
+        className="p-3 rounded-full shadow-lg transition-all hover:scale-105"
         style={{
           backgroundColor: currentTheme.button,
-          color: currentTheme.text,
+          color: "white",
         }}
         aria-label="Toggle Settings"
       >
-        {inSettings ? <X size={20} /> : <SettingsIcon size={20} />}
+        {inSettings ? <X size={24} /> : <SettingsIcon size={24} />}
       </button>
 
       {/* Settings Panel */}
       {inSettings && (
         <div
-          className="mt-4 p-4 border rounded-lg shadow-lg transition-all"
+          className="mt-4 p-5 border rounded-2xl shadow-lg transition-all duration-300 ease-in-out"
           style={{
             backgroundColor: currentTheme.card,
             color: currentTheme.text,
             borderColor: currentTheme.accent || "#ccc",
           }}
         >
-          <h2 className="text-lg font-semibold mb-2">Select a Theme:</h2>
+          <h2 className="text-xl font-semibold mb-3">Select a Theme:</h2>
           <ThemeSelector />
           <TimeSetting />
         </div>
