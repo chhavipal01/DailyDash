@@ -4,7 +4,7 @@ import { getDatabase } from "firebase/database";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAP_VKnXZ9XBysbXOMnszEZQcS_6Kmb2kA",
+    apiKey: import.meta.VITE_FIREBASE_API,
     authDomain: "productivity-firebase.firebaseapp.com",
     projectId: "productivity-firebase",
     storageBucket: "productivity-firebase.firebasestorage.app",
