@@ -79,7 +79,7 @@ const ActivityTracker = () => {
 
   return (
     <div
-      className="p-4 rounded-3xl  w-full "
+      className="p-4 rounded-3xl shadow-md w-full transition-colors duration-500 hover:scale-105"
       style={{
         backgroundColor: "rgba(255, 255, 255, 0.5)",
         color: themes[theme].text,

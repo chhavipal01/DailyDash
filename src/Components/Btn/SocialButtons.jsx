@@ -19,7 +19,7 @@ const SocialButtons = ({ customIcons = [] }) => {
 
   return (
     <div 
-      className="flex fixed bottom-4 justify-center space-x-4 p-4 rounded-lg transition-all" 
+      className="flex fixed bottom-4 justify-center space-x-4 p-4 rounded-lg transition-colour duration-500 hover:scale-105" 
       style={{ backgroundColor: themes[theme].bg }}
     >
       {icons.map(({ id, icon, link }) => (

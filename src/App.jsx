@@ -16,6 +16,7 @@ import SocialButtons from "./Components/Btn/SocialButtons";
 import AiBtn from "./Components/Btn/AiBtn";
 
 function AppContent() {
+  
   const { theme, themes } = useContext(ThemeContext);
 
   return (
@@ -41,7 +42,7 @@ function AppContent() {
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col px-20 py-10  gap-4 ">
+        <div className="flex flex-col px-20 py-10 gap-4 ">
           {/* Weather + Activity Tracker Side by Side */}
           <div className="grid grid-cols-2 gap-4 ">
             <div className="p-0 border rounded-3xl ">

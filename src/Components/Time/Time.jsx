@@ -35,7 +35,7 @@ const Time = ({ is24Hour }) => {
 
   return (
     <div
-      className="time-card flex flex-col justify-center items-center w-full max-w-sm h-auto p-6 rounded-full transition-colors duration-500 hover:scale-105 "
+      className="time-card shadow-md flex flex-col justify-center items-center w-full max-w-sm h-auto p-6 rounded-full transition-colors duration-500 hover:scale-105 "
       style={{
         backgroundColor: "rgba(255, 255, 255, 0.5)",
         color: themes[theme].text,

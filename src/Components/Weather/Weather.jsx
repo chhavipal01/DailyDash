@@ -1,6 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../../Context/ThemeContext";
-import LordIcon from "../LordIcon";
+import clearGif from "../Weather/icon/sunny.gif";
+import rainGif from "../Weather/icon/rain.gif";
+import nightgif from "../Weather/icon/night.gif";
+import cloudsgif from "../Weather/icon/cloudy.gif";
+import cloudynightgif from "../Weather/icon/cloudy-night.gif";
+ import snowGif from "../weather/icon/snow.gif";
+import drizzlegif from "../Weather/icon/drizzle.gif";
+import stormgif from "../Weather/icon/storm.gif";
+import windgif from "../Weather/icon/wind.gif";
+import sungif from "../Weather/icon/sunny.gif";
 
 const Weather = () => {
   const { theme, themes } = useContext(ThemeContext);
@@ -13,23 +22,23 @@ const Weather = () => {
   const apiurl = "https://api.openweathermap.org/data/2.5/weather";
 
   const weatherIcons = {
-    Clear: "https://cdn.lordicon.com/rjzlnunf.json",
-    Clouds: "https://cdn.lordicon.com/slkvcfos.json",
-    Rain: "https://cdn.lordicon.com/lzgqzxrq.json",
-    Drizzle: "https://cdn.lordicon.com/koyszqnh.json",
-    Thunderstorm: "https://cdn.lordicon.com/udwhdpod.json",
-    Snow: "https://cdn.lordicon.com/xirobkro.json",
-    Mist: "https://cdn.lordicon.com/qghrdngw.json",
-    Smoke: "https://cdn.lordicon.com/qghrdngw.json",
-    Haze: "https://cdn.lordicon.com/qghrdngw.json",
-    Fog: "https://cdn.lordicon.com/qghrdngw.json",
-    Dust: "https://cdn.lordicon.com/qghrdngw.json",
-    Sand: "https://cdn.lordicon.com/qghrdngw.json",
-    Ash: "https://cdn.lordicon.com/qghrdngw.json",
-    Squall: "https://cdn.lordicon.com/qghrdngw.json",
-    Tornado: "https://cdn.lordicon.com/qghrdngw.json",
-  };
-
+  Clear: clearGif,
+  Thunderstorm: stormgif,
+  Drizzle: drizzlegif,
+  Rain: rainGif,
+  Snow: snowGif,
+  Clouds: cloudsgif,
+  Mist: windgif,
+  Smoke: windgif,
+  Haze: windgif,
+  Dust: windgif,
+  Fog: windgif,
+  Sand: windgif,
+  Ash: windgif,
+  Squall: windgif,
+  Tornado: stormgif,
+  sun: sungif,
+};
   const fetchWeatherByCity = async (city) => {
     setLoading(true);
     setError(null);
@@ -66,9 +75,12 @@ const Weather = () => {
   const capitalizeWords = (str) =>
     str ? str.replace(/\b\w/g, (char) => char.toUpperCase()) : "";
 
+  // Define mainWeather from weather data
+  const mainWeather = weather?.weather?.[0]?.main;
+
   return (
     <div
-      className="p-4 rounded-3xl shadow-md w-full  h-70"
+      className="p-4 rounded-3xl shadow-md w-full h-70 transition-colors duration-500 hover:scale-105"
       style={{
         backgroundColor: "rgba(255, 255, 255, 0.5)",
         color: themes[theme].text,
@@ -109,13 +121,22 @@ const Weather = () => {
             {weather.name}, {weather.sys.country}
           </h2>
           <div className="flex justify-center my-2">
-            <LordIcon
-              src={weatherIcons[weather.weather[0].main] || weatherIcons["Clear"]}
-              width={80}
-              height={80}
-              trigger="loop"
-            />
-          </div>
+  {mainWeather && (
+    <div
+      className="w-14 h-14 flex items-center justify-center rounded-full"
+      style={{ 
+        backgroundColor: "rgba(255, 255, 255, 0.5)", // Card ka BG se match
+        overflow: 'hidden' // Rounded ka effect rahe
+      }}
+    >
+      <img
+        src={weatherIcons[mainWeather] ?? clearGif}
+        alt={mainWeather}
+        className="w-15 h-15 object-cover mix-blend-multiply"
+      />
+    </div>
+  )}
+</div>
           <p className="text-lg font-extrabold">{weather.main.temp}°C</p>
           <p>Weather: {capitalizeWords(weather.weather[0].description)}</p>
           <p>Humidity: {weather.main.humidity}%</p>

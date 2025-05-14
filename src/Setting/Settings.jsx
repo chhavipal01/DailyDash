@@ -34,7 +34,7 @@ const Settings = () => {
         <div
           className="mt-4 p-5 border rounded-2xl shadow-lg transition-all duration-300 ease-in-out"
           style={{
-            backgroundColor: currentTheme.card,
+            backgroundColor: themes[theme].bg,
             color: currentTheme.text,
             borderColor: currentTheme.accent || "#ccc",
           }}
