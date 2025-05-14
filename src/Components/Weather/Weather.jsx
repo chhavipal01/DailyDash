@@ -18,7 +18,7 @@ const Weather = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const apikey = "b80f63525271b0c855528df460e1e9ee";
+  const apikey = import.meta.env.VITE_WEATHER_API_KEY;
   const apiurl = "https://api.openweathermap.org/data/2.5/weather";
 
   const weatherIcons = {

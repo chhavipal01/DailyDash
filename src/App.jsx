@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./App.css";
 import "./index.css";
+// import 'dotenv/config';
 
 import ActivityTracker from "./Components/ActivityTracker/ActivityTracker";
 import Todo from "./Components/ToDo/Todo";
@@ -14,6 +15,7 @@ import Notes from "./Components/Note/Notes";
 import ThemeProvider, { ThemeContext } from "./Context/ThemeContext";
 import SocialButtons from "./Components/Btn/SocialButtons";
 import AiBtn from "./Components/Btn/AiBtn";
+
 
 function AppContent() {
   
