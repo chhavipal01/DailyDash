@@ -5,13 +5,13 @@ import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: import.meta.VITE_FIREBASE_API,
-    authDomain: "productivity-firebase.firebaseapp.com",
-    projectId: "productivity-firebase",
-    storageBucket: "productivity-firebase.firebasestorage.app",
-    messagingSenderId: "1083943036722",
-    appId: "1:1083943036722:web:269de586f595d9b63f192b",
-    measurementId: "G-GX6LCMZR5E",
-    databaseURL: "https://productivity-firebase-default-rtdb.firebaseio.com",
+    authDomain: import.meta.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.VITE_FIREBASE_STORAGE_BUCKET ,
+    messagingSenderId: import.meta.VITE_FIREBASE__MESSAGING_SENDER_ID,
+    appId: import.meta.VITE_FIREBASE_APP_ID  ,
+    measurementId: import.meta.VITE_FIREBASE_MEASUREMENT_ID ,
+    databaseURL: import.meta.VITE_FIREBASE_DATABASE_URL ,
   };
  // Initialize Firebase only once
 // Initialize Firebase only once

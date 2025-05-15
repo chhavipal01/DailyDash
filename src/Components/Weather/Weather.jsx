@@ -5,7 +5,7 @@ import rainGif from "../Weather/icon/rain.gif";
 import nightgif from "../Weather/icon/night.gif";
 import cloudsgif from "../Weather/icon/cloudy.gif";
 import cloudynightgif from "../Weather/icon/cloudy-night.gif";
- import snowGif from "../weather/icon/snow.gif";
+ import snowGif from "../Weather/icon/snow.gif";
 import drizzlegif from "../Weather/icon/drizzle.gif";
 import stormgif from "../Weather/icon/storm.gif";
 import windgif from "../Weather/icon/wind.gif";
@@ -21,13 +21,20 @@ const Weather = () => {
   const apikey = import.meta.env.VITE_WEATHER_API_KEY;
   const apiurl = "https://api.openweathermap.org/data/2.5/weather";
 
+  const sunrise = Weather?.sys?.sunrise;
+  const sunset = Weather?.sys?.sunset;
+  const currentTime = Math.floor(Date.now() / 1000);
+  const isDayTime = currentTime > sunrise && currentTime < sunset;
+
+
   const weatherIcons = {
-  Clear: clearGif,
+  Clear: isDayTime? clearGif : nightgif,
+  Clouds: isDayTime? cloudsgif : cloudynightgif,
   Thunderstorm: stormgif,
   Drizzle: drizzlegif,
   Rain: rainGif,
   Snow: snowGif,
-  Clouds: cloudsgif,
+  
   Mist: windgif,
   Smoke: windgif,
   Haze: windgif,
