@@ -16,7 +16,7 @@ const Notes = () => {
   };
 
   return (
-    <div className="p-4 rounded-lg shadow-md w-full transition-colors duration-500 hover:scale-105" style={{ backgroundColor:"rgba(255, 255, 255, 0.5)", color: themes[theme].text }}>
+    <div className="p-4 rounded-3xl shadow-md w-full transition-colors duration-500 hover:scale-105" style={{ backgroundColor:"rgba(255, 255, 255, 0.5)", color: themes[theme].text }}>
       <div className="flex items-center text-xl font-bold mb-2">
         <Notebook className="mr-2"style={{  color: themes[theme].text }} /> Notes
       </div>

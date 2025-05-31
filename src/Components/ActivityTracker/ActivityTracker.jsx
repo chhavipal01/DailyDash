@@ -17,7 +17,7 @@ const ActivityTracker = () => {
 
         Object.entries(activityData).forEach(([url, time]) => {
           try {
-            const domain = new URL(url).hostname.replace("www.", "");
+            const domain = new URL(url).hostname;
             groupedData[domain] = (groupedData[domain] || 0) + time;
           } catch (e) {
             groupedData[url] = (groupedData[url] || 0) + time;
@@ -61,7 +61,6 @@ const ActivityTracker = () => {
         });
       });
     } else {
-      // fallback for development preview
       setChartData({
         labels: ["youtube.com", "google.com"],
         datasets: [{
@@ -79,22 +78,21 @@ const ActivityTracker = () => {
 
   return (
     <div
-      className="p-4 rounded-3xl shadow-md w-full transition-colors duration-500 hover:scale-105"
+      className="h-full w-full p-4 rounded-3xl shadow-md transition-transform duration-500 hover:scale-105"
       style={{
         backgroundColor: "rgba(255, 255, 255, 0.5)",
         color: themes[theme].text,
-        maxHeight: "280px", // reduced height
       }}
     >
       <h2 className="text-md font-semibold mb-2">Activity Tracker</h2>
       {chartData ? (
-        <div className="w-full h-[220px]"> {/* bigger chart */}
+        <div className="w-full h-[220px]">
           <Doughnut
             data={chartData}
             options={{
               responsive: true,
               maintainAspectRatio: false,
-              cutout: "50%", // controls donut thickness
+              cutout: "50%",
               plugins: {
                 tooltip: {
                   callbacks: {

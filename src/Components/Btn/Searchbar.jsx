@@ -18,8 +18,7 @@ export default function Searchbar() {
   };
 
   return (
-    <div className="flex items-center p-3 w-full jus
-    tify-start transition-colors duration-500 hover:scale-105"> 
+    <div className="flex items-center p-3 w-full justify-start transition-colors duration-500 hover:scale-105"> 
       <div className="relative w-full max-w-xl">
         {/* Search Icon */}
         <div
