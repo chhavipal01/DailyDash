@@ -4,7 +4,7 @@ export const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
  const themes = {
-  //  Primary Themes
+  // Primary Themes
   red: { bg: "#fdbdbd", text: "#411b1b", button: "#ec4343" },
   yellow: { bg: "#ffed80", text: "#2f2707", button: "#d1a93d" },
   green: { bg: "#c7e4c7", text: "#1b411b", button: "#5cba5c" },
@@ -34,7 +34,7 @@ const ThemeProvider = ({ children }) => {
   softLilac: { bg: "#ede5f5", text: "#4e3a5c", button: "#bba3d0" },
   pistachio: { bg: "#e2f7dc", text: "#2e5b3a", button: "#a6d89c" },
 
-  //  Actionable Themes
+  // Actionable Themes
   focusBlue: { bg: "#e6f0ff", text: "#003366", button: "#0055cc" },
   alertRed: { bg: "#ffe5e5", text: "#660000", button: "#cc0000" },
   successGreen: { bg: "#e6ffe6", text: "#145214", button: "#28a745" },
@@ -45,8 +45,26 @@ const ThemeProvider = ({ children }) => {
 
   // Special
   pureWhite: { bg: "#ffffff", text: "#000000", button: "#2e2e2e" },
-  black: { bg: "#000000", text: "#ffffff", button: "#333333" }
+  black: { bg: "#000000", text: "#ffffff", button: "#333333" },
+
+  // 🔥 Neon / Opera GX Style Themes 🔥
+  neonRed: {
+    bg: "#0f0f0f", text: "#ff4b5c", button: "#ff4b5c"
+  },
+  neonGreen: {
+    bg: "#0f0f0f", text: "#00ff9f", button: "#00ff9f"
+  },
+  neonPurple: {
+    bg: "#0f0f0f", text: "#c77dff", button: "#c77dff"
+  },
+  neonBlue: {
+    bg: "#0f0f0f", text: "#3ec9ff", button: "#3ec9ff"
+  },
+  neonYellow: {
+    bg: "#0f0f0f", text: "#fff200", button: "#fff200"
+  }
 };
+
 
   const getStoredTheme = () => {
     const storedTheme = localStorage.getItem("selectedTheme");

@@ -12,14 +12,14 @@ const defaultIcons = [
 ];
 
 const SocialButtons = ({ customIcons = [] }) => {
-  const { theme, themes } = useContext(ThemeContext); // Theme context se theme fetch kar rahe hain
+  const { theme, themes } = useContext(ThemeContext); 
 
-  // Agar user ne custom buttons diye hain to wo use honge, warna default
+  
   const icons = customIcons.length > 0 ? customIcons : defaultIcons;
 
   return (
     <div 
-      className="flex fixed bottom-4 justify-center space-x-4 p-4 rounded-lg transition-colour duration-500 hover:scale-105" 
+      className="flex fixed bottom-4 justify-center space-x-4 p-4 rounded-lg transition-colour duration-500 " 
       style={{ backgroundColor: themes[theme].bg }}
     >
       {icons.map(({ id, icon, link }) => (
@@ -28,7 +28,7 @@ const SocialButtons = ({ customIcons = [] }) => {
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-12 h-12 flex items-center justify-center rounded-full text-2xl transition-transform transform hover:scale-110 shadow-md"
+          className="w-12 h-12 flex items-center justify-center rounded-full text-2xl transition-transform transform hover:scale-150 shadow-md"
           style={{
             backgroundColor: themes[theme].button, // Theme-based button color
             color: "white", // Theme-based text color
