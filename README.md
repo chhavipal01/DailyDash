@@ -1,7 +1,6 @@
 # 🌟 DailyDash - A Smart New Tab Experience
 
-**DailyDash** is a powerful and visually appealing Chrome extension that transforms your new tab into a personal dashboard. With features like to-do lists, weather updates, search bar, bookmarks, and theme customization — all integrated into a minimalist interface — it keeps your day organized and productive.
-
+**DailyDash**NewTab is a versatile browser extension that personalizes your New Tab page with customizable themes, a welcoming message, and various handy tools, all while integrating seamlessly with your preferred search engine.
 ---
 
 ## 🚀 Features
@@ -16,7 +15,9 @@
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack![Screenshot 2025-06-28 003820](https://github.com/user-attachments/assets/cc8e06bf-b96e-45cc-b4a4-cfafc283d76a)
+![Screenshot 2025-06-28 003722](https://github.com/user-attachments/assets/c21507df-3e4f-4e41-a79b-d622c85e4bd4)
+
 
 - **React.js** – Frontend framework
 - **Firebase Storage** – Theme storage and management
