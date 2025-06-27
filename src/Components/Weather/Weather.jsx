@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../../Context/ThemeContext";
 
 // Weather icons
-import clearGif from "../Weather/icon/sunny.gif";
+import clearGif from "../Weather/icon/Sunny.gif";
 import rainGif from "../Weather/icon/rain.gif";
 import nightGif from "../Weather/icon/night.gif";
 import cloudsGif from "../Weather/icon/cloudy.gif";
