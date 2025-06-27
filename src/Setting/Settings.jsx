@@ -34,7 +34,7 @@ const Settings = () => {
   }, [inSettings]);
 
   return (
-    <div className="p-4 fixed right-5 bottom-5 z-50 transition-transform transform hover:scale-150">
+    <div className="p-4 fixed right-5 bottom-5 z-50 transition-transform transform hover:scale-120">
       {/* Toggle Button */}
       <button
         onClick={() => setInSettings(!inSettings)}
