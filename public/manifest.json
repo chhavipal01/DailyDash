@@ -3,26 +3,26 @@
   "name": "Productivity Booster",
   "version": "1.0",
   "description": "Boost your productivity with features like Timer, Greetings, To-do, Weather, Activity Tracker, and Bookmarks.",
+
   "permissions": [
     "storage",
-    "activeTab",
     "tabs",
-     "identity"
+    "identity"
   ],
- 
+
   "host_permissions": [
     "https://api.openweathermap.org/*",
     "https://www.googleapis.com/*",
     "https://accounts.google.com/*",
-    "https://*.firebaseio.com/*"
-
-
+    "https://*.firebaseio.com/*",
+    "https://*.googleapis.com/*"
   ],
-  "icons": {
-    "16": "icons/logo.png",
-    "48": "icons/logo.png",
-    "128": "icons/logo.png"
+
+  "oauth2": {
+    "client_id": "1083943036722-6c5o6ohjh6jdeispttpff07t1ub2ro12.apps.googleusercontent.com",
+    "scopes": ["email", "profile"]
   },
+
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -31,9 +31,11 @@
       "128": "icons/logo.png"
     }
   },
+
   "background": {
     "service_worker": "background.js"
   },
+
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -41,15 +43,32 @@
       "run_at": "document_idle"
     }
   ],
+
   "web_accessible_resources": [
     {
-      "resources": ["icons/*", "assets/*"],
+      "resources": [
+        "icons/*",
+        "assets/*",
+        "main.html",
+        "main.js",
+        "popup.html"
+      ],
       "matches": ["<all_urls>"]
     }
   ],
- 
-  "options_page": "options.html",
+
   "chrome_url_overrides": {
     "newtab": "index.html"
-  }
+  },
+
+  "icons": {
+    "16": "icons/logo.png",
+    "48": "icons/logo.png",
+    "128": "icons/logo.png"
+  },
+
+ "content_security_policy": {
+  "extension_pages": "script-src 'self'; object-src 'self';"
+}
+
 }

@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import "./App.css";
 import "./index.css";
-// import 'dotenv/config';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import ActivityTracker from "./Components/ActivityTracker/ActivityTracker";
 import Todo from "./Components/ToDo/Todo";
@@ -15,10 +16,9 @@ import Notes from "./Components/Note/Notes";
 import ThemeProvider, { ThemeContext } from "./Context/ThemeContext";
 import SocialButtons from "./Components/Btn/SocialButtons";
 import AiBtn from "./Components/Btn/AiBtn";
-
+import GoogleAppsButton from "./Components/Btn/GoogleAppsButton";
 
 function AppContent() {
-  
   const { theme, themes } = useContext(ThemeContext);
 
   return (
@@ -29,9 +29,10 @@ function AppContent() {
       {/* Top Bar */}
       <div className="flex justify-between items-center mb-6">
         <Greeting />
-        <div className="flex gap-4">
+        <div className="fixed top-5 right-6 z-50 flex gap-2">
           <Todo />
           <Bookmark />
+          <GoogleAppsButton/>
         </div>
       </div>
 
@@ -42,24 +43,22 @@ function AppContent() {
           <Time />
           <Searchbar />
         </div>
- {/* Right Column */}
-    <div className="flex flex-col px-20 py-10 gap-4">
-    {/* Weather + Activity Tracker Side by Side */}
-   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-[280px]">
-    <div className="h-full">
-      <Weather />
-    </div>
-    <div className="h-full">
-      <ActivityTracker />
-    </div>
-  </div>
 
-  {/* Notes below them, same half width */}
-  <div className="p-0 rounded-3xl shadow-md">
-    <Notes />
-  </div>
-</div>
+        {/* Right Column */}
+        <div className="flex flex-col px-20 py-10 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-[280px]">
+            <div className="h-full">
+              <Weather />
+            </div>
+            <div className="h-full">
+              <ActivityTracker />
+            </div>
+          </div>
 
+          <div className="p-0 rounded-3xl shadow-md">
+            <Notes />
+          </div>
+        </div>
       </div>
 
       {/* Bottom Bar */}
@@ -81,7 +80,13 @@ function AppContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <Router>
+        <Routes>
+          <Route path="/" element={<AppContent />} />
+          <Route path="*" element={<Navigate to="/" />} />
+          {/* Future: <Route path="/settings" element={<SettingsPage />} /> */}
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

@@ -1,19 +1,26 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ListTodo } from "lucide-react";
 import { ThemeContext } from "../../Context/ThemeContext";
 
+const LOCAL_KEY = "todos";
+
 const Todo = () => {
-  const { theme, themes } = useContext(ThemeContext); // Get theme from context
+  const { theme, themes } = useContext(ThemeContext);
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState(() => {
-    return JSON.parse(localStorage.getItem("todos")) || [];
-  });
+  const [todos, setTodos] = useState([]);
   const [editedTodo, setEditedTodo] = useState(null);
   const [editText, setEditText] = useState("");
-  const [isVisible, setIsVisible] = useState(false); // Toggle visibility
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
+    const savedTodos = localStorage.getItem(LOCAL_KEY);
+    if (savedTodos) {
+      setTodos(JSON.parse(savedTodos));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(todos));
   }, [todos]);
 
   const addTodo = (e) => {
@@ -23,21 +30,21 @@ const Todo = () => {
     const newTodo = {
       id: Date.now(),
       todotext: todo.trim(),
-      completed: false, // Default completion status is false
+      completed: false,
     };
 
-    setTodos([...todos, newTodo]);
+    setTodos((prev) => [...prev, newTodo]);
     setTodo("");
   };
 
   const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setTodos((prev) => prev.filter((t) => t.id !== id));
   };
 
   const toggleCompletion = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    setTodos((prev) =>
+      prev.map((t) =>
+        t.id === id ? { ...t, completed: !t.completed } : t
       )
     );
   };
@@ -48,9 +55,9 @@ const Todo = () => {
   };
 
   const saveEdit = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, todotext: editText.trim() } : todo
+    setTodos((prev) =>
+      prev.map((t) =>
+        t.id === id ? { ...t, todotext: editText.trim() } : t
       )
     );
     setEditedTodo(null);
@@ -58,130 +65,116 @@ const Todo = () => {
   };
 
   return (
-    <div className="relative">
-      {/* Todo Button */}
+    <div className="fixed top-5 right-36 z-50 flex flex-col items-end space-y-2 transition-transform transform hover:scale-120">
       <button
-        className="fixed top-4 right-32  rounded-lg shadow-md p-2  transition hover:bg-opacity-80 flex items-center justify-center w-10 h-10"
-        style={{
-          backgroundColor: themes[theme].button,
-          color: "white", // Ensuring text color is white
-        }}
+        className="rounded-lg shadow-md p-2 flex items-center justify-center w-10 h-10"
+        style={{ backgroundColor: themes[theme].button, color: "white" }}
         onClick={() => setIsVisible(!isVisible)}
       >
-        {isVisible ? "Close" : <span className="flex items-center gap-1"><ListTodo /></span>}
+        <ListTodo size={24} />
       </button>
 
       {isVisible && (
-        <div className="flex ">
-          <div
-            className="w-[350px] rounded-lg p-4 shadow-lg"
-            style={{
-              backgroundColor: themes[theme].bg,
-              color: "white", // Ensuring text color is white everywhere inside
-            }}
-          >
-            <h3 className="text-center text-lg font-bold mb-3">Todos</h3>
+        <div
+          className="w-[350px] rounded-lg p-4 shadow-lg"
+          style={{ backgroundColor: themes[theme].bg, color: "white" }}
+        >
+          <h3 className="text-center text-lg font-bold mb-3">Todos</h3>
 
-            {/* Todo Form */}
-            <form onSubmit={addTodo} className="flex gap-2 mb-3">
-              <input
-                type="text"
-                placeholder="Enter a todo..."
-                className="flex-1 px-3 py-2 border rounded focus:ring-2 outline-none"
-                style={{
-                  backgroundColor: themes[theme].inputBg,
-                  color: "black", // White text inside the input
-                  borderColor: themes[theme].button,
-                }}
-                value={todo}
-                onChange={(e) => setTodo(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600 transition"
-                style={{
-                  backgroundColor: themes[theme].button,
-                  color: "white", // White text on button
-                }}
-              >
-                Add +
-              </button>
-            </form>
+          <form onSubmit={addTodo} className="flex gap-2 mb-3">
+            <input
+              type="text"
+              placeholder="Enter a todo..."
+              className="flex-1 px-3 py-2 border rounded"
+              style={{
+                backgroundColor: themes[theme].inputBg,
+                color: "black",
+                borderColor: themes[theme].button,
+              }}
+              value={todo}
+              onChange={(e) => setTodo(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="px-3 py-2 rounded text-white"
+              style={{ backgroundColor: themes[theme].button }}
+            >
+              Add +
+            </button>
+          </form>
 
-            {/* Todo List */}
-            <ul className="space-y-2">
-              {todos.length > 0 ? (
-                todos.map((t) => (
-                  <li
-                    key={t.id}
-                    className="flex justify-between items-center p-2 rounded"
-                    style={{
-                      backgroundColor: t.completed
-                        ? themes[theme].button
-                        : themes[theme].bg,
-                      color: "black", // White text for each todo item
-                    }}
-                  >
+          <ul className="space-y-2">
+            {todos.length > 0 ? (
+              todos.map((t) => (
+                <li
+                  key={t.id}
+                  className="flex justify-between items-center p-2 rounded"
+                  style={{
+                    backgroundColor: t.completed
+                      ? themes[theme].button
+                      : themes[theme].bg,
+                    color: "black",
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={t.completed}
+                    onChange={() => toggleCompletion(t.id)}
+                    className="mr-2 accent-green-500"
+                  />
+
+                  {editedTodo === t.id ? (
                     <input
-                      type="checkbox"
-                      checked={t.completed}
-                      onChange={() => toggleCompletion(t.id)}
-                      className="mr-2 accent-green-500"
+                      type="text"
+                      value={editText}
+                      onChange={(e) => setEditText(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && saveEdit(t.id)}
+                      className="flex-1 px-2 py-1 bg-gray-700 text-white rounded"
                     />
+                  ) : (
+                    <span
+                      className={`flex-1 ${
+                        t.completed ? "line-through text-gray-400" : ""
+                      }`}
+                    >
+                      {t.todotext}
+                    </span>
+                  )}
 
+                  <div className="flex gap-1">
                     {editedTodo === t.id ? (
-                      <input
-                        type="text"
-                        value={editText}
-                        onChange={(e) => setEditText(e.target.value)}
-                        onKeyDown={(e) => e.key === "Enter" && saveEdit(t.id)}
-                        className="flex-1 px-2 py-1 bg-gray-700 text-white rounded"
-                      />
-                    ) : (
-                      <span
-                        className={`flex-1 ${
-                          t.completed ? "line-through text-gray-400" : ""
-                        }`}
+                      <button
+                        onClick={() => saveEdit(t.id)}
+                        className="px-2 py-1 rounded text-white"
+                        style={{ backgroundColor: themes[theme].button }}
                       >
-                        {t.todotext}
-                      </span>
-                    )}
-
-                    <div className="flex gap-1">
-                      {editedTodo === t.id ? (
+                        Save
+                      </button>
+                    ) : (
+                      <>
                         <button
-                          onClick={() => saveEdit(t.id)}
-                          className="bg-green-500 px-2 py-1 rounded hover:bg-green-600"
+                          onClick={() => startEditing(t.id, t.todotext)}
+                          className="px-2 py-1 rounded text-white"
                           style={{ backgroundColor: themes[theme].button }}
                         >
-                          Save
+                          Edit
                         </button>
-                      ) : (
-                        <>
-                          <button
-                            onClick={() => startEditing(t.id, t.todotext)}
-                            className="bg-yellow-500 px-2 py-1 rounded hover:bg-yellow-600"
-                            style={{ backgroundColor: themes[theme].button }}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => deleteTodo(t.id)}
-                            className="bg-red-500 px-2 py-1 rounded hover:bg-red-600"
-                            style={{ backgroundColor: themes[theme].button }}
-                          >
-                            Delete
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  </li>
-                ))
-              ) : (
-                <p className="text-center text-gray-400">No todos yet.</p>
-              )}
-            </ul>
-          </div>
+                        <button
+                          onClick={() => deleteTodo(t.id)}
+                          className="px-2 py-1 rounded text-white"
+                          style={{ backgroundColor: themes[theme].button }}
+                        >
+                          Delete
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </li>
+              ))
+            ) : (
+              <p className="text-center text-gray-400">No todos yet.</p>
+            )}
+          </ul>
         </div>
       )}
     </div>

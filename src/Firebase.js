@@ -16,7 +16,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-const database = getDatabase(app);
 
-const firebase = { app, auth, provider, database, signInWithRedirect, getRedirectResult };
-export default firebase;
+const db = getDatabase(app);
+
+// add named exports at the bottom
+export { auth, provider, db, signInWithRedirect, getRedirectResult };
+export default app;
+

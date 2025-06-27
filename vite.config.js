@@ -8,8 +8,17 @@ export default defineConfig({
    
   ],
   build: {
-    outDir: 'dist'  // ✅ Build output folder (default is 'dist')
+    outDir: 'dist',  // ✅ Build output folder (default is 'dist')
+     rollupOptions: {
+      input: {
+        popup: 'index.html',
+      }
+    }
   },
+  server: {
+    historyApiFallback: true
+  },
+
   alias: {
     '@': path.resolve(__dirname, 'src'),
   },
