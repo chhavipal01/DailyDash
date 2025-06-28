@@ -1,6 +1,6 @@
 
 
-https://github.com/user-attachments/assets/acd59d15-1a5f-4693-b5f5-74855ed256bc
+
 
 
 **DailyDash – Chrome New Tab Dashboard**
