@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/9c118bb0-f873-4c14-bd0f-7a07c3774b0a
+
 # 🌟 DailyDash - A Smart New Tab Experience
 
 **DailyDash**NewTab is a versatile browser extension that personalizes your New Tab page with customizable themes, a welcoming message, and various handy tools, all while integrating seamlessly with your preferred search engine.
